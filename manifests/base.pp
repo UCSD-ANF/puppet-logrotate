@@ -22,15 +22,34 @@ class logrotate::base {
     '/etc/logrotate.d':
       ensure  => directory,
       mode    => '0755';
-    '/etc/cron.daily/logrotate':
-      ensure  => file,
-      mode    => '0555',
-      source  => 'puppet:///modules/logrotate/etc/cron.daily/logrotate';
   }
 
-  case $::operatingsystem {
-    'Debian','Ubuntu': {
+  case $::osfamily {
+    'Debian': {
+      file { '/etc/cron.daily/logrotate':
+        ensure  => file,
+        mode    => '0555',
+        source  => 'puppet:///modules/logrotate/etc/cron.daily/logrotate',
+      }
       include logrotate::defaults::debian
+    }
+    'RedHat': {
+      file { '/etc/cron.daily/logrotate':
+        ensure  => file,
+        mode    => '0555',
+        source  => 'puppet:///modules/logrotate/etc/cron.daily/logrotate',
+      }
+    }
+    'Solaris': {
+      cron { 'logrotate':
+        command => '/opt/csw/bin/logrotate',
+        user    => 'root',
+        hour    => 0,
+        minute  => 0,
+      }
+      Package {
+        provider => 'pkgutil',
+      }
     }
     default: { }
   }
