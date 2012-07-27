@@ -42,7 +42,7 @@ class logrotate::base {
     }
     'Solaris': {
       cron { 'logrotate':
-        command => '/opt/csw/bin/logrotate',
+        command => '/opt/csw/sbin/logrotate',
         user    => 'root',
         hour    => 0,
         minute  => 0,
