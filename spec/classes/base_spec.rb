@@ -71,13 +71,15 @@ describe 'logrotate::base' do
     let(:facts) { {:osfamily => 'Solaris'} }
 
     it do
+      should contain_package('logrotate').with_provider('pkgutil')
       should_not include_class('logrotate::defaults::debian')
 
       should contain_cron( 'logrotate').with({
-        'command' => '/opt/csw/bin/logrotate',
+        'command' => '/opt/csw/sbin/logrotate /etc/logrotate.conf',
         'user'    => 'root',
         'hour'    => 0,
         'minute'  => 0,
+        'require' => 'Package[logrotate]',
       })
 
       should_not contain_file('/etc/cron.daily/logrotate')

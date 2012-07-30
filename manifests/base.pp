@@ -8,6 +8,14 @@ class logrotate::base {
     ensure => latest,
   }
 
+  $config_basedir = '/etc'
+  $config_file    = "${config_basedir}/logrotate.conf"
+  $config_dir     = "${config_basedir}/logrotate.d"
+  $sbindir        = $::osfamily ? {
+    'Solaris' => '/opt/csw/sbin',
+    default   => '/usr/sbin',
+  }
+
   File {
     owner   => 'root',
     group   => 'root',
@@ -15,11 +23,11 @@ class logrotate::base {
   }
 
   file {
-    '/etc/logrotate.conf':
+    $config_file :
       ensure  => file,
       mode    => '0444',
       source  => 'puppet:///modules/logrotate/etc/logrotate.conf';
-    '/etc/logrotate.d':
+    $config_dir :
       ensure  => directory,
       mode    => '0755';
   }
@@ -42,10 +50,11 @@ class logrotate::base {
     }
     'Solaris': {
       cron { 'logrotate':
-        command => '/opt/csw/sbin/logrotate',
+        command => "${sbindir}/logrotate ${config_file}",
         user    => 'root',
         hour    => 0,
         minute  => 0,
+        require => Package['logrotate'],
       }
       Package {
         provider => 'pkgutil',
