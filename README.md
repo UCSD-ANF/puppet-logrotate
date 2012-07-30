@@ -1,6 +1,6 @@
 # Logrotate module for Puppet
 
-Version v1.0.1-ANF3
+Version v1.0.1-ANF4
 [![Build Status](https://secure.travis-ci.org/UCSD-ANF/puppet-logrotate.png)](http://travis-ci.org/UCSD-ANF/puppet-logrotate)
 
 A more Puppety way of managing logrotate configs.  Where possible, as many of
