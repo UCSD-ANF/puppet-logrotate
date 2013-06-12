@@ -1,6 +1,6 @@
 # Logrotate module for Puppet
 
-Version v1.0.1-ANF4
+Version v1.0.1-ANF5
 [![Build Status](https://secure.travis-ci.org/UCSD-ANF/puppet-logrotate.png)](http://travis-ci.org/UCSD-ANF/puppet-logrotate)
 
 A more Puppety way of managing logrotate configs.  Where possible, as many of
@@ -33,7 +33,7 @@ compressext     - The extention String to be appended to the rotated log files
                   after they have been compressed (optional).
 compressoptions - A String of command line options to be passed to the
                   compression program specified in `compresscmd` (optional).
-copy            - A Boolean specifying whether logrotate should just take a 
+copy            - A Boolean specifying whether logrotate should just take a
                   copy of the log file and not touch the original (optional).
 copytruncate    - A Boolean specifying whether logrotate should truncate the
                   original log file after taking a copy (optional).
@@ -57,7 +57,7 @@ extension       - Log files with this extension String are allowed to keep it
                   after rotation (optional).
 ifempty         - A Boolean specifying whether the log file should be rotated
                   even if it is empty (optional).
-mail            - The email address String that logs that are about to be 
+mail            - The email address String that logs that are about to be
                   rotated out of existence are emailed to (optional).
 mailfirst       - A Boolean that when used with `mail` has logrotate email the
                   just rotated file rather than the about to expire file
@@ -83,7 +83,7 @@ prerotate       - A command String that should be executed by /bin/sh before
 firstaction     - A command String that should be executed by /bin/sh once
                   before all log files that match the wildcard pattern are
                   rotated (optional).
-lastaction      - A command String that should be execute by /bin/sh once 
+lastaction      - A command String that should be execute by /bin/sh once
                   after all the log files that match the wildcard pattern are
                   rotated (optional).
 rotate          - The Integer number of rotated log files to keep on disk
@@ -95,7 +95,7 @@ rotate_every    - How often the log files should be rotated as a String.
 size            - The String size a log file has to reach before it will be
                   rotated (optional).  The default units are bytes, append k,
                   M or G for kilobytes, megabytes or gigabytes respectively.
-sharedscripts   - A Boolean specifying whether logrotate should run the 
+sharedscripts   - A Boolean specifying whether logrotate should run the
                   postrotate and prerotate scripts for each matching file or
                   just once (optional).
 shred           - A Boolean specifying whether logs should be deleted with
