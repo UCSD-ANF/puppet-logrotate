@@ -28,7 +28,7 @@ describe 'logrotate::base' do
     let(:facts) { {:osfamily => 'Debian'} }
 
     it do
-      should include_class('logrotate::defaults::debian')
+      should contain_class('logrotate::defaults::debian')
 
       should_not contain_cron('logrotate')
 
@@ -49,7 +49,7 @@ describe 'logrotate::base' do
     let(:facts) { {:osfamily => 'RedHat'} }
 
     it do
-      should_not include_class('logrotate::defaults::debian')
+      should_not contain_class('logrotate::defaults::debian')
 
       should_not contain_cron('logrotate')
 
@@ -72,7 +72,7 @@ describe 'logrotate::base' do
 
     it do
       should contain_package('logrotate').with_provider('pkgutil')
-      should_not include_class('logrotate::defaults::debian')
+      should_not contain_class('logrotate::defaults::debian')
 
       should contain_cron( 'logrotate').with({
         'command' => '/opt/csw/sbin/logrotate /etc/logrotate.conf',
