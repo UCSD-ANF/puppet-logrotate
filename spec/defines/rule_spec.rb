@@ -41,7 +41,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  compress$/)
+          .with_content(/\n  compress\n/)
       end
     end
 
@@ -52,7 +52,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  nocompress$/)
+          .with_content(/\n  nocompress\n/)
       end
     end
 
@@ -77,7 +77,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  compresscmd bzip2$/)
+          .with_content(/\n  compresscmd bzip2\n/)
       end
     end
 
@@ -90,7 +90,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  compressext .bz2$/)
+          .with_content(/\n  compressext .bz2\n/)
       end
     end
 
@@ -103,7 +103,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  compressoptions -9$/)
+          .with_content(/\n  compressoptions -9\n/)
       end
     end
 
@@ -115,7 +115,7 @@ describe 'logrotate::rule' do
       }
 
       it do
-        should contain_file('/etc/logrotate.d/test').with_content(/^  copy$/)
+        should contain_file('/etc/logrotate.d/test').with_content(/\n  copy\n/)
       end
     end
 
@@ -125,7 +125,7 @@ describe 'logrotate::rule' do
       }
 
       it do
-        should contain_file('/etc/logrotate.d/test').with_content(/^  nocopy$/)
+        should contain_file('/etc/logrotate.d/test').with_content(/\n  nocopy\n/)
       end
     end
 
@@ -150,7 +150,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  copytruncate$/)
+          .with_content(/\n  copytruncate\n/)
       end
     end
 
@@ -161,7 +161,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  nocopytruncate$/)
+          .with_content(/\n  nocopytruncate\n/)
       end
     end
 
@@ -186,7 +186,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  create$/)
+          .with_content(/\n  create\n/)
       end
 
       context 'and create_mode => 0777' do
@@ -200,7 +200,7 @@ describe 'logrotate::rule' do
 
         it do
           should contain_file('/etc/logrotate.d/test') \
-            .with_content(/^  create 0777$/)
+            .with_content(/\n  create 0777\n/)
         end
 
         context 'and create_owner => www-data' do
@@ -215,7 +215,7 @@ describe 'logrotate::rule' do
 
           it do
             should contain_file('/etc/logrotate.d/test') \
-              .with_content(/^  create 0777 www-data/)
+              .with_content(/\n  create 0777 www-data/)
           end
 
           context 'and create_group => admin' do
@@ -231,7 +231,7 @@ describe 'logrotate::rule' do
 
             it do
               should contain_file('/etc/logrotate.d/test') \
-                .with_content(/^  create 0777 www-data admin$/)
+                .with_content(/\n  create 0777 www-data admin\n/)
             end
           end
         end
@@ -278,7 +278,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  nocreate$/)
+          .with_content(/\n  nocreate\n/)
       end
 
       context 'and create_mode => 0777' do
@@ -319,7 +319,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  dateext$/)
+          .with_content(/\n  dateext\n/)
       end
     end
 
@@ -330,7 +330,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  nodateext$/)
+          .with_content(/\n  nodateext\n/)
       end
     end
 
@@ -355,7 +355,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  dateformat -%Y%m%d$/)
+          .with_content(/\n  dateformat -%Y%m%d\n/)
       end
     end
 
@@ -368,7 +368,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  delaycompress$/)
+          .with_content(/\n  delaycompress\n/)
       end
     end
 
@@ -379,7 +379,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  nodelaycompress$/)
+          .with_content(/\n  nodelaycompress\n/)
       end
     end
 
@@ -404,7 +404,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  extension \.foo$/)
+          .with_content(/\n  extension \.foo\n/)
       end
     end
 
@@ -417,7 +417,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  ifempty$/)
+          .with_content(/\n  ifempty\n/)
       end
     end
 
@@ -428,7 +428,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  notifempty$/)
+          .with_content(/\n  notifempty\n/)
       end
     end
 
@@ -453,7 +453,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  mail test@example.com$/)
+          .with_content(/\n  mail test@example.com\n/)
       end
 
       context 'and mailfirst => true' do
@@ -467,7 +467,7 @@ describe 'logrotate::rule' do
 
         it do
           should contain_file('/etc/logrotate.d/test') \
-            .with_content(/^  mailfirst$/)
+            .with_content(/\n  mailfirst\n/)
         end
 
         context 'and maillast => true' do
@@ -499,7 +499,7 @@ describe 'logrotate::rule' do
 
         it do
           should contain_file('/etc/logrotate.d/test') \
-            .with_content(/^  maillast$/)
+            .with_content(/\n  maillast\n/)
         end
       end
     end
@@ -511,7 +511,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  nomail$/)
+          .with_content(/\n  nomail\n/)
       end
     end
 
@@ -524,7 +524,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  maxage 3$/)
+          .with_content(/\n  maxage 3\n/)
       end
     end
 
@@ -549,7 +549,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  minsize 100$/)
+          .with_content(/\n  minsize 100\n/)
       end
     end
 
@@ -560,7 +560,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  minsize 100k$/)
+          .with_content(/\n  minsize 100k\n/)
       end
     end
 
@@ -571,7 +571,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  minsize 100M$/)
+          .with_content(/\n  minsize 100M\n/)
       end
     end
 
@@ -582,7 +582,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  minsize 100G$/)
+          .with_content(/\n  minsize 100G\n/)
       end
     end
 
@@ -607,7 +607,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  missingok$/)
+          .with_content(/\n  missingok\n/)
       end
     end
 
@@ -618,7 +618,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  nomissingok$/)
+          .with_content(/\n  nomissingok\n/)
       end
     end
 
@@ -643,7 +643,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  olddir \/var\/log\/old$/)
+          .with_content(/\n  olddir \/var\/log\/old\n/)
       end
     end
 
@@ -654,7 +654,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  noolddir$/)
+          .with_content(/\n  noolddir\n/)
       end
     end
 
@@ -719,7 +719,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  rotate 3$/)
+          .with_content(/\n  rotate 3\n/)
       end
     end
 
@@ -744,7 +744,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  daily$/)
+          .with_content(/\n  daily\n/)
       end
     end
 
@@ -755,7 +755,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  weekly$/)
+          .with_content(/\n  weekly\n/)
       end
     end
 
@@ -766,7 +766,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  monthly$/)
+          .with_content(/\n  monthly\n/)
       end
     end
 
@@ -777,7 +777,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  yearly$/)
+          .with_content(/\n  yearly\n/)
       end
     end
 
@@ -802,7 +802,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  size 100$/)
+          .with_content(/\n  size 100\n/)
       end
     end
 
@@ -813,7 +813,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  size 100k$/)
+          .with_content(/\n  size 100k\n/)
       end
     end
 
@@ -824,7 +824,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  size 100M$/)
+          .with_content(/\n  size 100M\n/)
       end
     end
 
@@ -835,7 +835,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  size 100G$/)
+          .with_content(/\n  size 100G\n/)
       end
     end
 
@@ -860,7 +860,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  sharedscripts$/)
+          .with_content(/\n  sharedscripts\n/)
       end
     end
 
@@ -871,7 +871,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  nosharedscripts$/)
+          .with_content(/\n  nosharedscripts\n/)
       end
     end
 
@@ -896,7 +896,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  shred$/)
+          .with_content(/\n  shred\n/)
       end
 
       context 'and shredcycles => 3' do
@@ -906,7 +906,7 @@ describe 'logrotate::rule' do
 
         it do
           should contain_file('/etc/logrotate.d/test') \
-            .with_content(/^  shredcycles 3$/)
+            .with_content(/\n  shredcycles 3\n/)
         end
       end
 
@@ -930,7 +930,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  noshred$/)
+          .with_content(/\n  noshred\n/)
       end
     end
 
@@ -955,7 +955,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  start 0$/)
+          .with_content(/\n  start 0\n/)
       end
     end
 
@@ -980,7 +980,7 @@ describe 'logrotate::rule' do
 
       it do
         should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  uncompresscmd bunzip2$/)
+          .with_content(/\n  uncompresscmd bunzip2\n/)
       end
     end
   end

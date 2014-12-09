@@ -1,19 +1,16 @@
-<%
+<%-
   opts = []
+  setvars = scope.to_hash.keys
 
-  if @path.kind_of?(Array)
-    rpath = @path.join(' ')
-  else
-    rpath = @path
-  end
+  rpath = Array(@path).join(' ')
 
-  if has_variable?('_create')
-    if @_create == 'create'
-      opts << [_create, create_mode, create_owner, create_group].reject { |r|
-        r == 'undef'
-      }.join(' ')
+  if nil != @create then
+    if @_create == 'create' then
+      opts << ['_create','create_mode','create_owner','create_group'].collect { |c|
+        scope.lookupvar(c) if setvars.include?(c) and :undef != scope.lookupvar(c) 
+      }.join(' ').strip
     else
-      opts << _create
+      opts << @_create
     end
   end
 
@@ -22,7 +19,7 @@
     '_mail', '_missingok', '_olddir', '_sharedscripts', '_ifempty', '_maillast',
     '_mailfirst', '_shred', '_rotate_every'
   ].each do |bool|
-    opts << eval(bool) if has_variable?(bool)
+    opts << scope.lookupvar(bool) if setvars.include?(bool) and :undef != scope.lookupvar(bool)
   end
 
   [
@@ -30,32 +27,31 @@
     'maxage', 'minsize', 'rotate', 'size', 'shredcycles', 'start',
     'uncompresscmd'
   ].each do |key|
-    value = eval(key)
-    opts << "#{key} #{value}" if value != 'undef'
+    opts << "#{key} %s" % scope.lookupvar(key) if setvars.include?(key) and :undef != scope.lookupvar(key)
   end
 -%>
 <%= rpath %> {
-<% opts.each do |opt| -%>
+<%- opts.each do |opt| -%>
   <%= opt %>
 <% end -%>
-<% if @postrotate != 'undef' -%>
+<%- if @postrotate -%>
   postrotate
     <%= @postrotate %>
   endscript
-<% end -%>
-<% if @prerotate != 'undef' -%>
+<%- end -%>
+<%- if @prerotate -%>
   prerotate
     <%= @prerotate %>
   endscript
-<% end -%>
-<% if @firstaction != 'undef' -%>
+<%- end -%>
+<%- if @firstaction -%>
   firstaction
     <%= @firstaction %>
   endscript
-<% end -%>
-<% if @lastaction != 'undef' -%>
+<%- end -%>
+<%- if @lastaction -%>
   lastaction
     <%= @lastaction %>
   endscript
-<% end -%>
+<%- end -%>
 }
