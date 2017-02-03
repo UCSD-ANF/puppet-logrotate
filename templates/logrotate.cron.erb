@@ -1,0 +1,6 @@
+#!/bin/sh
+# THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.  ANY CHANGES WILL BE
+# OVERWRITTEN.
+
+test -x <%= @sbindir %>/logrotate || exit 0
+<%= @sbindir %>/logrotate <%= @config_file %>
