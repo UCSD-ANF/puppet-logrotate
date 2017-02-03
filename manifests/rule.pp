@@ -371,10 +371,10 @@ define logrotate::rule(
 
   include logrotate::base
 
-  file { "/etc/logrotate.d/${name}":
+  file { "${logrotate::base::config_dir}/${name}":
     ensure  => $ensure,
     owner   => 'root',
-    group   => 'root',
+    group   => $logrotate::base::group,
     mode    => '0444',
     content => template('logrotate/etc/logrotate.d/rule.erb'),
     require => Class['logrotate::base'],

@@ -1,4 +1,4 @@
-# Internal: Install logrotate and configure it to read from /etc/logrotate.d
+# Internal: Install logrotate and configure it to read from $config_basedir/logrotate.d
 #
 # Examples
 #
@@ -8,17 +8,25 @@ class logrotate::base {
     ensure => latest,
   }
 
-  $config_basedir = '/etc'
+  $config_basedir = $::osfamily ? {
+    'FreeBSD' => '/usr/local/etc',
+     default  => '/etc',
+  }
   $config_file    = "${config_basedir}/logrotate.conf"
   $config_dir     = "${config_basedir}/logrotate.d"
   $sbindir        = $::osfamily ? {
     'Solaris' => '/opt/csw/sbin',
+    'FreeBSD' => '/usr/local/sbin',
     default   => '/usr/sbin',
+  }
+  $group = $::osfamily ? {
+    'FreeBSD' => 'wheel',
+     default  => 'root',
   }
 
   File {
     owner   => 'root',
-    group   => 'root',
+    group   => $group,
     require => Package['logrotate'],
   }
 
@@ -26,7 +34,7 @@ class logrotate::base {
     $config_file :
       ensure  => file,
       mode    => '0444',
-      source  => 'puppet:///modules/logrotate/etc/logrotate.conf';
+      content  => template('logrotate/logrotate.conf.erb');
     $config_dir :
       ensure  => directory,
       mode    => '0755';
@@ -37,7 +45,7 @@ class logrotate::base {
       file { '/etc/cron.daily/logrotate':
         ensure  => file,
         mode    => '0555',
-        source  => 'puppet:///modules/logrotate/etc/cron.daily/logrotate',
+        content => template('logrotate/logrotate.cron.erb'),
       }
       include logrotate::defaults::debian
     }
@@ -45,7 +53,7 @@ class logrotate::base {
       file { '/etc/cron.daily/logrotate':
         ensure  => file,
         mode    => '0555',
-        source  => 'puppet:///modules/logrotate/etc/cron.daily/logrotate',
+        content => template('logrotate/logrotate.cron.erb'),
       }
     }
     'Solaris': {
@@ -58,6 +66,13 @@ class logrotate::base {
       }
       Package {
         provider => 'pkgutil',
+      }
+    }
+    'FreeBSD': {
+      file { '/etc/periodic/daily/601.logrotate':
+        ensure  => file,
+        mode    => '0555',
+        content => template('logrotate/logrotate.cron.erb'),
       }
     }
     default: { }
